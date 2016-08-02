@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.primeton.iaas.selfservice.portal.caas.namespaces.dao.NamespaceDao">
+	<insert id="addNamespace" parameterType="com.primeton.iaas.selfservice.portal.caas.vo.NamespaceVO">
+		insert into resources
+			(
+				resource_id, user_id, resource_name, cpu, memory, disk, status,
+				created, modified
+			)
+		values
+			(
+				#{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{cpu, jdbcType=INTEGER}, #{memory, jdbcType=INTEGER}, #{disk, jdbcType=INTEGER}, #{status, jdbcType=VARCHAR},
+				#{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert>
+	
+	<update id="updateNamespace" parameterType="com.primeton.iaas.selfservice.portal.caas.vo.NamespaceVO">
+		update resources set
+			user_id				= #{userId, jdbcType=VARCHAR},
+			resource_name		= #{name, jdbcType=VARCHAR},
+			cpu					= #{cpu, jdbcType=INTEGER},
+			memory				= #{memory, jdbcType=INTEGER},
+			disk				= #{disk, jdbcType=INTEGER},
+			status				= #{status, jdbcType=VARCHAR},
+			created				= #{createTime, jdbcType=TIMESTAMP},
+			modified			= #{modifiedTime, jdbcType=TIMESTAMP}
+		where
+			resource_id			= #{id, jdbcType=VARCHAR}					
+	</update>
+	
+	<delete id="deleteNamespace" parameterType="java.lang.String">
+		delete from resources where resource_id = #{id, jdbcType=VARCHAR}
+	</delete>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.caas.vo.NamespaceVO" id="NamespaceRetMap">
+		<id property="id" column="resource_id" jdbcType="VARCHAR"/>
+		<result property="userId" column="user_id" jdbcType="VARCHAR"/>
+		<result property="name" column="resource_name" jdbcType="VARCHAR"/>
+		<result property="cpu" column="cpu" jdbcType="INTEGER"/>
+		<result property="memory" column="memory" jdbcType="INTEGER"/>
+		<result property="disk" column="disk" jdbcType="INTEGER"/>
+		<result property="status" column="status" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<select id="listAllNamespaces" resultMap="NamespaceRetMap">
+		select * from resources order by created
+	</select>
+	
+	<select id="listOneNamespace" resultMap="NamespaceRetMap" parameterType="java.lang.String"> 
+		select * from resources where resource_id = #{id, jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+
+</mapper>

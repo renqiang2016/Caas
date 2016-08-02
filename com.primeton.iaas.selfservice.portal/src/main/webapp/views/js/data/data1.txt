@@ -1,0 +1,53 @@
+{
+    "data": [
+        {
+            "check":"<input type=\"checkbox\" name=\"id[]\" value=\"vm01\">",
+            "vmName":"vm01",
+            "image":"centos7",
+            "ipAddr":"192.168.100.11",
+            "flavor":"m1_small",
+            "status":"running",
+            "zone":"zone_01",
+            "createTime":"2015-10-17 12:30:00",
+            "actions":"<div style=\"width: 50px;\"><div class=\"input-group-btn\"><button type=\"button\" class=\"btn btn-success dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">操作 <i class=\"fa fa-angle-down\"></i></button><ul class=\"dropdown-menu pull-right\"><li><a href=\"#\">启动云主机 </a></li><li><a href=\"#\">终止云主机</a></li><li><a href=\"#\">重启云主机</a></li><li class=\"divider\"></li><li><a href=\"#\">网络变更 </a></li></ul></div></div>"
+        },
+        {
+            "check":"<input type=\"checkbox\" name=\"id[]\" value=\"04\">",
+            "vmName":"vm04",
+            "image":"centos7",
+            "ipAddr":"192.168.100.14",
+            "flavor":"m1.xlarger",
+            "status":"running",
+            "zone":"zone_03",
+            "createTime":"2015-10-18 15:40:00",
+            "actions":"<div style=\"width: 50px;\"><div class=\"input-group-btn\"><button type=\"button\" class=\"btn btn-success dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">操作 <i class=\"fa fa-angle-down\"></i></button><ul class=\"dropdown-menu pull-right\"><li><a href=\"#\">启动云主机 </a></li><li><a href=\"#\">终止云主机</a></li><li><a href=\"#\">重启云主机</a></li><li class=\"divider\"></li><li><a href=\"#\">网络变更 </a></li></ul></div></div>"
+        },
+        {
+            "check":"<input type=\"checkbox\" name=\"id[]\" value=\"vm02\">",
+            "vmName":"vm02",
+            "image":"centos7",
+            "ipAddr":"192.168.100.12",
+            "flavor":"m1.medium",
+            "status":"running",
+            "zone":"zone_01",
+            "createTime":"2015-10-17 13:30:00",
+            "actions":"<div style=\"width: 50px;\"><div class=\"input-group-btn\"><button type=\"button\" class=\"btn btn-success dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">操作 <i class=\"fa fa-angle-down\"></i></button><ul class=\"dropdown-menu pull-right\"><li><a href=\"#\">启动云主机 </a></li><li><a href=\"#\">终止云主机</a></li><li><a href=\"#\">重启云主机</a></li><li class=\"divider\"></li><li><a href=\"#\">网络变更 </a></li></ul></div></div>"
+        },
+        {
+            "check":"<input type=\"checkbox\" name=\"id[]\" value=\"vm03\">",
+            "vmName":"vm03",
+            "image":"centos7",
+            "ipAddr":"192.168.100.13",
+            "flavor":"m1.larger",
+            "status":"running",
+            "zone":"zone_02",
+            "createTime":"2015-10-18 15:30:00",
+            "actions":"<div style=\"width: 50px;\"><div class=\"input-group-btn\"><button type=\"button\" class=\"btn btn-success dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">操作 <i class=\"fa fa-angle-down\"></i></button><ul class=\"dropdown-menu pull-right\"><li><a href=\"#\">启动云主机 </a></li><li><a href=\"#\">终止云主机</a></li><li><a href=\"#\">重启云主机</a></li><li class=\"divider\"></li><li><a href=\"#\">网络变更 </a></li></ul></div></div>"
+        }
+
+        
+    ],
+    "draw": 3,
+    "recordsTotal": 4,
+    "recordsFiltered": 4
+}

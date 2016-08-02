@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.primeton.iaas.selfservice.portal.permission.role.dao.RoleDao">
+	<insert id="insertRole" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.RoleVO">
+		insert into roles
+			(
+				role_id, role_name, created, modified
+			)
+		values
+			(
+				#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, 
+				#{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert>
+	
+	<update id="updateRole" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.RoleVO">
+		update roles set
+			role_name		= #{name, jdbcType=VARCHAR},		
+			modified		= #{modifiedTime, jdbcType=TIMESTAMP}
+		where
+			role_id			= #{id, jdbcType=VARCHAR}					
+	</update>
+	
+	<delete id="deleteRole" parameterType="java.lang.String">
+		delete from roles where role_id = #{id, jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="deleteAuthUser" parameterType="java.lang.String">
+		delete from user_role where role_id = #{roleId, jdbcType=VARCHAR}
+	</delete>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.RoleVO" id="RoleRetMap">
+		<id property="id" column="role_id" jdbcType="VARCHAR"/>
+		<result property="name" column="role_name" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.FunctionVO" id="FunctionRetMap">
+		<id property="id" column="func_id" jdbcType="VARCHAR"/>
+		<result property="type" column="type" jdbcType="INTEGER"/>
+		<result property="name" column="func_name" jdbcType="VARCHAR"/>
+		<result property="action" column="action" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap> 
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.RoleFuncVO" id="RoleFuncRetMap">
+		<id property="roleId" column="role_id" jdbcType="VARCHAR"/>
+		<id property="functionId" column="func_id" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>	
+	</resultMap>
+	
+	<select id="queryAllRoles" resultMap="RoleRetMap">
+		select * from roles order by role_name
+	</select>
+	
+	<select id="queryAllRoleFuncs" resultMap="RoleFuncRetMap">
+		select * from role_func order by created
+	</select>
+	
+	<select id="queryOneRole" resultMap="RoleRetMap" parameterType="java.lang.String"> 
+		select * from roles where role_id = #{id, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryAuthFuncs" resultMap="FunctionRetMap" parameterType="java.lang.String"> 
+		select b.* from role_func a, functions b where a.role_id = #{id, jdbcType=VARCHAR} and a.func_id = b.func_id order by b.func_id, b.modified
+	</select>
+	
+	<select id="queryNoAuthFuncs" resultMap="FunctionRetMap" parameterType="java.lang.String"> 
+		select b.* from functions b where b.func_id not in (select a.func_id from role_func a WHERE a.role_id= #{id, jdbcType=VARCHAR}) order by b.func_id, b.modified
+	</select> 
+	
+	<insert id="insertRoleFunc" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.RoleFuncVO">
+		insert into role_func
+			(
+				role_id, func_id,
+				created, modified
+			)
+		values
+			(
+				#{roleId, jdbcType=VARCHAR}, #{functionId, jdbcType=VARCHAR},
+				#{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert>
+	
+	<update id="updateRoleFunc" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.RoleFuncVO">
+		update role_func set
+			func_id			= #{functionId, jdbcType=VARCHAR},			
+			modified		= #{modifiedTime, jdbcType=TIMESTAMP}
+		where
+			role_id			= #{roleId, jdbcType=VARCHAR}			
+	</update>
+	
+	<delete id="deleteRoleFunc" parameterType="java.lang.String">
+		delete from role_func where role_id = #{roleId, jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="queryOneRoleFunc" resultMap="RoleFuncRetMap" parameterType="java.lang.String"> 
+		select * from role_func where role_id = #{roleId, jdbcType=VARCHAR}
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="operation" version="2.5">
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	 <!-- <filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.primeton.iaas.selfservice.portal.loginmanager.filter.SessionFilter</filter-class>
+		<init-param>
+			<param-name>excludedPages</param-name>
+			<param-value>
+			/views/loginmanager/login.jsp,
+			/views/loginmanager/logout.jsp,
+			/views/loginmanager/js/*,
+			/rest/permission/user/check,
+			/views/common/*,
+			/views/js/*,
+			/resources/*,
+			/favicon.ico
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>homePage</param-name>
+			<param-value>/views/loginmanager/index.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/views/loginmanager/login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> --> 
+	
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+				classpath:applicationContext.xml,
+				classpath:datasource.xml
+		</param-value>
+	</context-param>	
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+	  <param-name>resteasy.resources</param-name>
+	  <param-value>
+	  		 com.primeton.iaas.selfservice.portal.permission.user.controller.UserController
+	  		 ,com.primeton.iaas.selfservice.portal.permission.role.controller.RoleController
+	  		 ,com.primeton.iaas.selfservice.portal.permission.function.controller.FunctionController
+	  		 ,com.primeton.iaas.selfservice.portal.permission.menu.controller.MenuController
+	  		 ,com.primeton.iaas.selfservice.portal.order.controller.OrderController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.namespaces.controller.NamespaceController
+	  </param-value>
+
+	</context-param>
+	
+	<context-param>
+	  <param-name>resteasy.injector.factory</param-name>
+	  <param-value>com.primeton.components.rest.extend.JSONInjectorFactoryImpl</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/rest</param-value>
+	</context-param>
+	
+	<!-- <filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.primeton.iaas.selfservice.portal.loginmanager.filter.SessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping> -->
+	
+	<servlet>
+	  <servlet-name>rest</servlet-name>
+	  <servlet-class>
+		org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>rest</servlet-name>
+	  <url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+  
+</web-app>

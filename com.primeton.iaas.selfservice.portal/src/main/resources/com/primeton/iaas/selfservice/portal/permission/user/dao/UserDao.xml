@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.primeton.iaas.selfservice.portal.permission.user.dao.UserDao">
+	<insert id="insertUser" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.UserVO">
+		insert into users
+			(
+				user_id, user_name, user_pwd, gender, tel, email, created, modified
+			)
+		values
+			(
+				#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, 
+				#{email, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+		
+	</insert>
+	
+<!-- 	<insert id="addDefaultRole" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.UserVO">
+			insert into user_role
+			(
+				user_id,created, modified
+			)
+		values
+			(
+				#{id, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert> -->
+	
+	<insert id="addAuthRole" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.UserRoleVO">
+		insert into user_role
+			(
+				user_id, role_id, created, modified
+			)
+		values
+			(
+				#{userId, jdbcType=VARCHAR}, #{roleId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert>
+	
+	<update id="updateUser" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.UserVO">
+		update users set
+			user_name		= #{name, jdbcType=VARCHAR},
+			user_pwd		= #{password, jdbcType=VARCHAR},
+			gender			= #{gender, jdbcType=VARCHAR},
+			tel				= #{tel, jdbcType=VARCHAR},
+			email			= #{email, jdbcType=VARCHAR},
+			modified		= #{modifiedTime, jdbcType=TIMESTAMP}
+		where
+			user_id			= #{id, jdbcType=VARCHAR}					
+	</update>
+	
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete from users where user_id = #{id, jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="deleteAuthRole" parameterType="java.lang.String">
+		delete from user_role where user_id = #{userId, jdbcType=VARCHAR}
+	</delete>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.UserVO" id="UserRetMap">
+		<id property="id" column="user_id" jdbcType="VARCHAR"/>
+		<result property="name" column="user_name" jdbcType="VARCHAR"/>
+		<result property="password" column="user_pwd" jdbcType="VARCHAR"/>
+		<result property="gender" column="gender" jdbcType="VARCHAR"/>
+		<result property="tel" column="tel" jdbcType="VARCHAR"/>
+		<result property="email" column="email" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.RoleVO" id="RoleRetMap">
+		<id property="id" column="role_id" jdbcType="VARCHAR"/>
+		<result property="name" column="role_name" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<select id="queryAllUsers" resultMap="UserRetMap">
+		select * from users order by user_name, created
+	</select>
+	
+	<select id="queryOneUser" resultMap="UserRetMap" parameterType="java.lang.String"> 
+		select * from users where user_id = #{id, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryAuthRoles" resultMap="RoleRetMap" parameterType="java.lang.String">  
+		select b.* from user_role a, roles b where a.user_id= #{id, jdbcType=VARCHAR} and a.role_id = b.role_id order by b.role_name, b.modified
+	</select>
+	
+	<select id="queryNoAuthRoles" resultMap="RoleRetMap" parameterType="java.lang.String"> 
+		select b.* from roles b where b.role_id not in (select a.role_id from user_role a WHERE a.user_id= #{id, jdbcType=VARCHAR}) order by b.role_name, b.modified
+		
+	</select>
+	
+	<select id="checkUser" resultMap="UserRetMap" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.UserVO">
+		select * from users where  user_name=#{name, jdbcType=VARCHAR} and user_pwd=#{password, jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+
+</mapper>

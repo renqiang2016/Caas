@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.primeton.iaas.selfservice.portal.permission.function.dao.FunctionDao">
+	<insert id="insertFunction" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.FunctionVO">
+		insert into functions
+			(
+				func_id, type, func_name, action,
+				created, modified
+			)
+		values
+			(
+				#{id, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER},#{name, jdbcType=VARCHAR}, #{action, jdbcType=VARCHAR},
+				#{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
+			)
+	</insert>
+	
+	<update id="updateFunction" parameterType="com.primeton.iaas.selfservice.portal.permission.vo.FunctionVO">
+		update functions set
+			type			= #{type, jdbcType=INTEGER},
+			func_name		= #{name, jdbcType=VARCHAR},
+			action			= #{action, jdbcType=VARCHAR},
+			modified		= #{modifiedTime, jdbcType=TIMESTAMP}
+		where
+			func_id			= #{id, jdbcType=VARCHAR}					
+	</update>
+	
+	<delete id="deleteFunction" parameterType="java.lang.String">
+		delete from functions where func_id = #{id, jdbcType=VARCHAR}
+	</delete>
+	
+	<resultMap type="com.primeton.iaas.selfservice.portal.permission.vo.FunctionVO" id="FunctionRetMap">
+		<id property="id" column="func_id" jdbcType="VARCHAR"/>
+		<result property="type" column="type" jdbcType="INTEGER"/>
+		<result property="name" column="func_name" jdbcType="VARCHAR"/>
+		<result property="action" column="action" jdbcType="VARCHAR"/>
+		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
+		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<select id="queryAllFunctions" resultMap="FunctionRetMap">
+		select * from functions order by created
+	</select>
+	
+	<select id="queryOneFunction" resultMap="FunctionRetMap" parameterType="java.lang.String"> 
+		select * from functions where func_id = #{id, jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+
+</mapper>

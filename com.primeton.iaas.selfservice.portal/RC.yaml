@@ -1,0 +1,76 @@
+!!io.fabric8.kubernetes.api.model.ReplicationController
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  annotations: null
+  creationTimestamp: '2016-06-03T05:53:55Z'
+  deletionGracePeriodSeconds: null
+  deletionTimestamp: null
+  generateName: null
+  generation: 1
+  labels: {name: redis-slave}
+  name: redis-slave
+  namespace: default
+  resourceVersion: '889872'
+  selfLink: /api/v1/namespaces/default/replicationcontrollers/redis-slave
+  uid: 8effe7d5-294f-11e6-84c9-000c29ee9e44
+spec:
+  replicas: 2
+  selector: {name: redis-slave}
+  template:
+    metadata:
+      annotations: null
+      creationTimestamp: null
+      deletionGracePeriodSeconds: null
+      deletionTimestamp: null
+      generateName: null
+      generation: null
+      labels: {name: redis-slave}
+      name: null
+      namespace: null
+      resourceVersion: null
+      selfLink: null
+      uid: null
+    spec:
+      activeDeadlineSeconds: null
+      containers:
+      - args: []
+        command: []
+        env:
+        - {name: GET_HOSTS_FROM, value: env, valueFrom: null}
+        image: kubeguide/guestbook-redis-slave
+        imagePullPolicy: Always
+        lifecycle: null
+        livenessProbe: null
+        name: slave
+        ports:
+        - {containerPort: 6379, hostIP: null, hostPort: null, name: null, protocol: TCP}
+        readinessProbe: null
+        resources: {limits: null, requests: null}
+        securityContext: null
+        stdin: null
+        stdinOnce: null
+        terminationMessagePath: /dev/termination-log
+        tty: null
+        volumeMounts: []
+        workingDir: null
+      dnsPolicy: ClusterFirst
+      host: null
+      hostIPC: null
+      hostNetwork: null
+      hostPID: null
+      imagePullSecrets: []
+      nodeName: null
+      nodeSelector: null
+      restartPolicy: Always
+      securityContext:
+        fsGroup: null
+        runAsNonRoot: null
+        runAsUser: null
+        seLinuxOptions: null
+        supplementalGroups: []
+      serviceAccount: null
+      serviceAccountName: null
+      terminationGracePeriodSeconds: 30
+      volumes: []
+status: {fullyLabeledReplicas: 2, observedGeneration: 1, replicas: 2}
