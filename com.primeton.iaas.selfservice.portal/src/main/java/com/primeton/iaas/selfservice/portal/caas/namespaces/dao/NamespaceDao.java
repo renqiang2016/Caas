@@ -16,6 +16,8 @@ public interface NamespaceDao extends IMarkerInterface{
 	
 	List<NamespaceVO> listAllNamespaces();
 	
+	List<NamespaceVO> listUserNamespaces(String userId);
+	
 	void addNamespace(NamespaceVO namespaceVO);
 	
 	void updateNamespace(NamespaceVO namespaceVO);

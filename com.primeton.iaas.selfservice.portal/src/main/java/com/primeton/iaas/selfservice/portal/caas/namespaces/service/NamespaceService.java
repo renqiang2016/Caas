@@ -15,6 +15,8 @@ public interface NamespaceService {
 	
 	List<NamespaceVO> listAllNamespaces();
 	
+	List<NamespaceVO> listUserNamespaces(String userId);
+	
 	void addNamespace(NamespaceVO namespaceVO);
 	
 	void updateNamespace(NamespaceVO namespaceVO);

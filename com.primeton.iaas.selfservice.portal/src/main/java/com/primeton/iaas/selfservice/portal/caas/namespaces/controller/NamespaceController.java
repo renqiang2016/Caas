@@ -58,6 +58,18 @@ public class NamespaceController {
 	}*/
 	
 	@GET
+	@Path("/listUserNamespaces/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Map<String, Object> listUserNamespaces(@PathParam("userId") String userId){
+		List<NamespaceVO> namespaceVOs = new ArrayList<NamespaceVO>();
+		namespaceVOs = namespaceService.listUserNamespaces(userId);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", namespaceVOs);
+		return result;
+		
+	}
+	
+	@GET
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Map<String, Object> listNamespaces(){

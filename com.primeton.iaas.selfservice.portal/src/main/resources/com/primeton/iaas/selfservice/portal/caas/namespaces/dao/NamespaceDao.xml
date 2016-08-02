@@ -48,6 +48,10 @@
 		select * from resources order by created
 	</select>
 	
+	<select id="listUserNamespaces" resultMap="NamespaceRetMap" parameterType="java.lang.String">
+		select * from resources where user_id = #{id, jdbcType=VARCHAR} order by created
+	</select>
+	
 	<select id="listOneNamespace" resultMap="NamespaceRetMap" parameterType="java.lang.String"> 
 		select * from resources where resource_id = #{id, jdbcType=VARCHAR}
 	</select>

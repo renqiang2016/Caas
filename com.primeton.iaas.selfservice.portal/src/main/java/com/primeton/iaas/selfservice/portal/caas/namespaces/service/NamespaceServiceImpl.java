@@ -65,4 +65,13 @@ public class NamespaceServiceImpl implements NamespaceService{
 		namespaceDao.deleteNamespace(namespaceId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.primeton.iaas.selfservice.portal.caas.namespaces.service.NamespaceService#listUserNamespaces(java.lang.String)
+	 */
+	@Override
+	public List<NamespaceVO> listUserNamespaces(String userId) {
+		// TODO Auto-generated method stub
+		return namespaceDao.listUserNamespaces(userId);
+	}
+
 }
