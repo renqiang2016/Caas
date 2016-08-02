@@ -17,12 +17,12 @@
 	<insert id="addOrderItem" parameterType="com.primeton.iaas.selfservice.portal.order.vo.OrderItemVO">
 		insert into order_item
 			(
-				item_id, order_id, name, cpu, memory, disk, comments
+				item_id, order_id, name, cpu, memory, pods, comments
 			)
 		values
 			(
 				#{id, jdbcType=VARCHAR}, #{orderId, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{cpu, jdbcType=INTEGER},
-				#{memory, jdbcType=INTEGER},#{disk, jdbcType=INTEGER}, #{comments, jdbcType=VARCHAR}
+				#{memory, jdbcType=INTEGER},#{pods, jdbcType=INTEGER}, #{comments, jdbcType=VARCHAR}
 			)
 	</insert>
 	
@@ -39,7 +39,7 @@
 			name			= #{name, jdbcType=VARCHAR},
 			cpu				= #{cpu, jdbcType=INTEGER},
 			memory			= #{memory, jdbcType=INTEGER},	
-			disk			= #{disk, jdbcType=INTEGER},
+			pods			= #{pods, jdbcType=INTEGER},
 			comments		= #{comments, jdbcType=VARCHAR}
 		where
 			item_id		= #{id, jdbcType=VARCHAR}					
@@ -69,7 +69,7 @@
 		<result property="name" column="name" jdbcType="VARCHAR"/>
 		<result property="cpu" column="cpu" jdbcType="INTEGER"/>
 		<result property="memory" column="memory" jdbcType="INTEGER"/>
-		<result property="disk" column="disk" jdbcType="INTEGER"/>
+		<result property="pods" column="pods" jdbcType="INTEGER"/>
 		<result property="comments" column="comments" jdbcType="VARCHAR"/>
 		
 	</resultMap>

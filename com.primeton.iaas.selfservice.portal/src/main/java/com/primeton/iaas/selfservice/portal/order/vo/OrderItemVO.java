@@ -13,7 +13,7 @@ public class OrderItemVO {
 	private String name;
 	private int cpu;
 	private int memory;
-	private int disk;
+	private int pods;
 	private String comments;
 	/**
 	 * @return the id
@@ -76,17 +76,18 @@ public class OrderItemVO {
 	public void setMemory(int memory) {
 		this.memory = memory;
 	}
+	
 	/**
-	 * @return the disk
+	 * @return the pods
 	 */
-	public int getDisk() {
-		return disk;
+	public int getPods() {
+		return pods;
 	}
 	/**
-	 * @param disk the disk to set
+	 * @param pods the pods to set
 	 */
-	public void setDisk(int disk) {
-		this.disk = disk;
+	public void setPods(int pods) {
+		this.pods = pods;
 	}
 	/**
 	 * @return the comments

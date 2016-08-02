@@ -58,7 +58,7 @@
                      {"data":"name"},
                      {"data":"cpu"},
                      {"data":"memory"},
-                     {"data":"disk"},
+                     {"data":"pods"},
                      {"data":"comments"},
                      {"render": render_getOperationHtml2}
                  ]

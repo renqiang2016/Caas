@@ -45,16 +45,15 @@ public class NamespaceApi {
 		kubernetesClient.namespaces().create(namespace);
 	}
 	
-	public void createResourceQuota(String name,int cpu, int memory, int disk) {
+	public void createResourceQuota(String name,int cpu, int memory, int pods) {
 		KubernetesClient kubernetesClient = new DefaultKubernetesClient("192.168.71.136:8080");
 		ResourceQuota quota = new ResourceQuotaBuilder().withNewMetadata()
 				.withName(name + "-quota")
-				.withNamespace(name)
 				.endMetadata()
 				.withNewSpec()
 				.addToHard("cpu", new Quantity(cpu + ""))
 				.addToHard("memory", new Quantity(memory + "Mi"))
-				.addToHard("disk", new Quantity(disk + "Mi"))
+				.addToHard("pods", new Quantity(pods + ""))
 				.endSpec().build();
 		kubernetesClient.resourceQuotas().inNamespace(name).create(quota);
 	}

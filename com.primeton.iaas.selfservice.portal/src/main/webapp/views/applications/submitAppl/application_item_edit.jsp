@@ -44,9 +44,9 @@
 										</div>
 									</div>
 									<div class="form-group"> 
-										<label class="col-md-3 control-label">硬盘</label>
+										<label class="col-md-3 control-label">POD</label>
 										<div class="col-md-8">
-											<input type="text" id="disk" class="form-control" maxlength="25"></input>
+											<input type="text" id="pods" class="form-control" maxlength="25"></input>
 										</div>
 									</div>
 									<div class="form-group">

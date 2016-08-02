@@ -60,7 +60,7 @@
 												<th>名字</th>
 												<th>CPU</th>
 												<th>内存</th>
-												<th>硬盘</th>
+												<th>POD</th>
 												<th>说明</th>
 											</tr>
 										</thead>

@@ -48,7 +48,7 @@
                      {"data":"name"},
                      {"data":"cpu"},
                      {"data":"memory"},
-                     {"data":"disk"},
+                     {"data":"pods"},
                      {"data":"comments"}
                  ]
             }

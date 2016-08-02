@@ -80,14 +80,14 @@ public class NamespaceController {
 		NamespaceApi namespaceApi = new NamespaceApi();
 		namespaceApi.createNamespace(orderItemVO.getName());
 		//资源配额
-		namespaceApi.createResourceQuota(orderItemVO.getName(), orderItemVO.getCpu(), orderItemVO.getMemory(), orderItemVO.getDisk());
+		namespaceApi.createResourceQuota(orderItemVO.getName(), orderItemVO.getCpu(), orderItemVO.getMemory(), orderItemVO.getPods());
 		
 		NamespaceVO namespaceVO = new NamespaceVO();
 		namespaceVO.setName(orderItemVO.getName());		
 		namespaceVO.setUserId((String) request.getSession().getAttribute("userId"));
 		namespaceVO.setCpu(orderItemVO.getCpu());
 		namespaceVO.setMemory(orderItemVO.getMemory());
-		namespaceVO.setDisk(orderItemVO.getDisk());
+		namespaceVO.setPods(orderItemVO.getPods());;
 		namespaceVO.setStatus(namespaceApi.getStatus(orderItemVO.getName()));
 		
 		namespaceService.addNamespace(namespaceVO);

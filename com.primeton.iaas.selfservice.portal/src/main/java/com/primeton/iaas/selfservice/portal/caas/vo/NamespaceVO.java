@@ -17,7 +17,7 @@ public class NamespaceVO {
 	private String userId;
 	private int cpu;
 	private int memory;
-	private int disk;
+	private int pods;
 	private String status;
 	private Date createTime;
 	private Date modifiedTime;
@@ -82,19 +82,20 @@ public class NamespaceVO {
 	public void setMemory(int memory) {
 		this.memory = memory;
 	}
-	/**
-	 * @return the disk
-	 */
-	public int getDisk() {
-		return disk;
-	}
-	/**
-	 * @param disk the disk to set
-	 */
-	public void setDisk(int disk) {
-		this.disk = disk;
-	}
 	
+	
+	/**
+	 * @return the pods
+	 */
+	public int getPods() {
+		return pods;
+	}
+	/**
+	 * @param pods the pods to set
+	 */
+	public void setPods(int pods) {
+		this.pods = pods;
+	}
 	/**
 	 * @return the createTime
 	 */

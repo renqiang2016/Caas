@@ -4,12 +4,12 @@
 	<insert id="addNamespace" parameterType="com.primeton.iaas.selfservice.portal.caas.vo.NamespaceVO">
 		insert into resources
 			(
-				resource_id, user_id, resource_name, cpu, memory, disk, status,
+				resource_id, user_id, resource_name, cpu, memory, pods, status,
 				created, modified
 			)
 		values
 			(
-				#{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{cpu, jdbcType=INTEGER}, #{memory, jdbcType=INTEGER}, #{disk, jdbcType=INTEGER}, #{status, jdbcType=VARCHAR},
+				#{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{cpu, jdbcType=INTEGER}, #{memory, jdbcType=INTEGER}, #{pods, jdbcType=INTEGER}, #{status, jdbcType=VARCHAR},
 				#{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}
 			)
 	</insert>
@@ -20,7 +20,7 @@
 			resource_name		= #{name, jdbcType=VARCHAR},
 			cpu					= #{cpu, jdbcType=INTEGER},
 			memory				= #{memory, jdbcType=INTEGER},
-			disk				= #{disk, jdbcType=INTEGER},
+			pods				= #{pods, jdbcType=INTEGER},
 			status				= #{status, jdbcType=VARCHAR},
 			created				= #{createTime, jdbcType=TIMESTAMP},
 			modified			= #{modifiedTime, jdbcType=TIMESTAMP}
@@ -38,7 +38,7 @@
 		<result property="name" column="resource_name" jdbcType="VARCHAR"/>
 		<result property="cpu" column="cpu" jdbcType="INTEGER"/>
 		<result property="memory" column="memory" jdbcType="INTEGER"/>
-		<result property="disk" column="disk" jdbcType="INTEGER"/>
+		<result property="pods" column="pods" jdbcType="INTEGER"/>
 		<result property="status" column="status" jdbcType="VARCHAR"/>
 		<result property="createTime" column="created" jdbcType="TIMESTAMP"/>
 		<result property="modifiedTime" column="modified" jdbcType="TIMESTAMP"/>
