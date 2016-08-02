@@ -18,7 +18,7 @@
 						<div class="form">
 							<form role="form" id="orderForm" class="form-horizontal">
 								<div class="form-body">
-									<input type="hidden" id="id" class="form-control">
+									<input type="hidden" id="userId" class="form-control">
 									<table style="width:100%;height:80%">
 										<tr>
 											<td>

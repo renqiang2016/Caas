@@ -10,6 +10,7 @@
 					<tr role="row">
 						<th width="2%"><input type="checkbox" class="group-checkable"></th>
 						<th>申请单号</th>
+						<th>用户ID</th>
 						<th>申请单状态</th>
 						<th>创建时间</th>
 						<th>更新时间</th>

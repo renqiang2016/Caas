@@ -84,10 +84,10 @@ public class NamespaceController {
 		
 		NamespaceVO namespaceVO = new NamespaceVO();
 		namespaceVO.setName(orderItemVO.getName());		
-		namespaceVO.setUserId((String) request.getSession().getAttribute("userId"));
+		namespaceVO.setUserId(orderVO.getUserId());
 		namespaceVO.setCpu(orderItemVO.getCpu());
 		namespaceVO.setMemory(orderItemVO.getMemory());
-		namespaceVO.setPods(orderItemVO.getPods());;
+		namespaceVO.setPods(orderItemVO.getPods());
 		namespaceVO.setStatus(namespaceApi.getStatus(orderItemVO.getName()));
 		
 		namespaceService.addNamespace(namespaceVO);

@@ -19,6 +19,7 @@
                  "columns":[
                      {"data":"check"},
                      {"data":"id"},
+                     {"data":"userId"},
                      {"data":"status", "render": function(data, type, full, meta) {var array = ['待提交','已撤销','已拒绝','待审批','待处理','已处理']; return array[data];}},
                      {"data":"createTime"},
                      {"data":"modifiedTime"},
@@ -120,6 +121,7 @@
     function doCreate(){
     	
 		var data = formHelper.getData();
+		//alert(data.userId);
 		data['status'] = 5;
     	var url = contextPath+"/rest/caas/namespaces/add";   	
     	$.ajax({
