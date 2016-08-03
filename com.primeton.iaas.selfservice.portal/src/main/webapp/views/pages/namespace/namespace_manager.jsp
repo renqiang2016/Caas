@@ -24,7 +24,7 @@
 							<th>名字</th>
 							<th>CPU</th>
 							<th>MEMORY</th>
-							<th>DISK</th>
+							<th>POD</th>
 							<th>状态</th>
 							<th>创建时间</th>
 							<th>变更时间</th>

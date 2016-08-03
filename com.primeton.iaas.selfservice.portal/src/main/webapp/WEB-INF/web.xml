@@ -55,6 +55,11 @@
 	  		 ,com.primeton.iaas.selfservice.portal.permission.menu.controller.MenuController
 	  		 ,com.primeton.iaas.selfservice.portal.order.controller.OrderController
 	  		 ,com.primeton.iaas.selfservice.portal.caas.namespaces.controller.NamespaceController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.pods.controller.PodController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.nodes.controller.NodeController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.replicationControllers.controller.ReplicationController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.services.controller.ServiceController
+	  		 ,com.primeton.iaas.selfservice.portal.caas.endpoints.controller.EndPointController
 	  </param-value>
 
 	</context-param>

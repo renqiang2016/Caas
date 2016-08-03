@@ -34,6 +34,9 @@ public class EndpointApi {
 			if (endpoint.getSubsets().toString() == "[]") {
 				endPointVO.setIp(null);
 			} else {
+				System.out.println(endpoint.getSubsets().toString());
+				System.out.println(endpoint.getSubsets().toString().split(",")[0].substring(46));
+				System.out.println(endpoint.getSubsets().toString().split(",")[5].substring(6));
 				endPointVO.setIp(endpoint.getSubsets().toString().split(",")[0].substring(46));
 				endPointVO.setPort(endpoint.getSubsets().toString().split(",")[5].substring(6));
 			}

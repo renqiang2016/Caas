@@ -19,7 +19,7 @@
                      {"data":"name"},
                      {"data":"cpu"},
                      {"data":"memory"},
-                     {"data":"disk"},
+                     {"data":"pods"},
                      {"data":"status"},
                      {"data":"createTime"},
                      {"data":"modifiedTime"},
