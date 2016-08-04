@@ -1,6 +1,6 @@
-	var userGrid = new Datatable();
-	function initUserGrid () {
-		userGrid.init({
+	var podGrid = new Datatable();
+	function initpodGrid () {
+		podGrid.init({
             src: $("#pagePodGrid"),
             onSuccess: function (grid) {
             },
@@ -62,7 +62,7 @@
 		$("#userModal .modal-title").html("编辑");
 		$("#userModal #saveBtn").css("display","none");
 		$("#userModal #updateBtn").css("display","");
-		var data = userGrid.getRowData(row.id);		
+		var data = podGrid.getRowData(row.id);		
     	formHelper.setData(data);
     	$('#userModal').modal('show');
 	}
@@ -76,7 +76,7 @@
 	    		dataType:'json',
 	    		success:function(ret){
 	    			$('#userModal').modal('hide');
-	    			userGrid.reload();
+	    			podGrid.reload();
 	    		},
 	    		error:function(ret){
 	    			alert("删除失败");
@@ -105,7 +105,7 @@
         		dataType:'json',
         		success:function(ret){
         			$('#userModal').modal('hide');
-        			userGrid.reload();
+        			podGrid.reload();
         		},
         		error:function(ret){
         			
@@ -119,9 +119,7 @@
     var formHelper;
     $(function(){
     	Metronic.init(); 
-    	initUserGrid();
-    	initUserRoleGrid1();
-    	initUserRoleGrid2();
+    	initpodGrid();
         $('#userModal').on("hidden.bs.modal", function() {
         	$("#userForm")[0].reset();
         });

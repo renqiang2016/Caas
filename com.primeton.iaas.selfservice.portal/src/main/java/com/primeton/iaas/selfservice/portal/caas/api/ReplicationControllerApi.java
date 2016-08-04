@@ -46,6 +46,31 @@ public class ReplicationControllerApi {
 		return result;
 	}
 	
+	public List<ReplicationControllerVO> listReplicationControllers(String namespace) {
+		List<ReplicationControllerVO> result = new ArrayList<ReplicationControllerVO>();
+		Config config = new Config();
+		Yaml yaml = new Yaml();
+		KubernetesClient kubernetesClient = new DefaultKubernetesClient("192.168.71.136:8080");
+		for (ReplicationController replicationController : kubernetesClient.replicationControllers().inNamespace(namespace).list().getItems()) {
+			ReplicationControllerVO replicationControllerVO = new ReplicationControllerVO();
+			replicationControllerVO.setId(replicationController.getMetadata().getName());
+			replicationControllerVO.setNamespace(replicationController.getMetadata().getNamespace());
+			replicationControllerVO.setCreateTime(replicationController.getMetadata().getCreationTimestamp());
+			replicationControllerVO.setLabels(replicationController.getMetadata().getLabels().toString().split("=")[1].split("}")[0]);
+			replicationControllerVO.setSelector(replicationController.getSpec().getSelector().toString().split("=")[1].split("}")[0]);
+			replicationControllerVO.setReplicas(replicationController.getSpec().getReplicas());
+			String temp = replicationController.getSpec().getTemplate().getSpec().getContainers().toString();
+			replicationControllerVO.setImage(temp.substring(temp.indexOf("image")+6, temp.indexOf("imagePullPolicy")-2));
+			replicationControllerVO.setRestartPolicy(replicationController.getSpec().getTemplate().getSpec().getRestartPolicy());
+			
+			
+			//System.out.println(yaml.dump(replicationController));
+			
+			result.add(replicationControllerVO);
+		}
+		return result;
+	}
+	
 	public void createReplicationController(ReplicationControllerVO replicationControllerVO) {
 		
 		KubernetesClient kubernetesClient = new DefaultKubernetesClient("192.168.71.136:8080");
