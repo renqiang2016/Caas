@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.yaml.snakeyaml.Yaml;
 
 import com.primeton.components.rest.annotation.JSONParam;
