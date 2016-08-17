@@ -55,168 +55,54 @@
     	$('#replicationModal').modal('show');
 	}
 	
-	$("#uploadBtn").click(function(){
-        var dialog = $("#uploadDiv").clone().dialog({
-            title: "附件上传",
-            width : '75%',
-            height : 500,
-            modal : true
+    function doSave(){
+    	/*$("#uploadForm").submit();
+    	$.ajax({
+    		url:contextPath+"/rest/caas/replicationcontrollers/add",
+    		type:'POST',
+    		dataType:'json',
+    		success:function(ret){ 
+    			$('#replicationModal').modal('hide');
+    			alert("创建成功！");
+    		},
+    		error:function(ret){
+    			alert("创建失败！");
+    		}
+    		
+    	});*/
+    	/*$.ajax({
+    		cache: true,
+    		type: "POST",
+    		url:contextPath+"/UploadHandleServlet",
+    		data:$('#uploadForm').serialize(),// 你的formid
+    		async: false,
+    		error: function(request) {
+    			alert("创建失败！");
+    		},
+    		success: function(data) {
+    			alert("创建成功！");
+    			$("#commonLayout_appcreshi").parent().html(data);
+    		}
+    	});*/
+    	var formData = new FormData($( "#uploadForm" )[0]);  
+        $.ajax({  
+             url: contextPath+"/UploadHandleServlet" ,  
+             type: 'POST',  
+             data: formData,  
+             async: false,  
+             cache: false,  
+             contentType: false,  
+             processData: false,  
+             success: function (returndata) {  
+            	 $('#replicationModal').modal('hide');
+     			 alert("创建成功！"); 
+             },  
+             error: function (returndata) {  
+            	 alert("创建失败！");  
+             }  
         });
-        $('#fileupload', dialog).fileupload({
-            dataType: 'json',
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar', dialog).css(
-                    'width',
-                    progress + '%'
-                ).html(progress + '%');
-                $("#msgDiv", dialog).html("处理中……");
-            },
-            add: function (e, data) {
-                data.url = "ra/suspiciousCase/uploadTotal";
-                data.submit();
-                $("#uploadBtn", dialog).off('click').on('click', function () {
-                    var id = getUrlParam('id');
-                    data.url = "ra/suspiciousCase/upload?id="+id;
-                    data.submit();
-                    setTimeout(function(){handleUploadTable();}, 3000);//延迟执行刷新
-                });
-            },
-            done: function (e, data) {
-                var isTotal = data.url.indexOf("uploadTotal") > -1;
-                var tip = isTotal ? "解析成功，请点击“确认上传”" : "上传";
-                var result = data.result;
-                var msg = "<b>" + tip + "</b>"
-                var bar = $('#progress .progress-bar');
-                bar.removeClass("progress-bar-warning progress-bar-success");
-                if(!result.success){
-                    msg = "<b>" + tip + "失败：</b>"+result.error;
-                    bar.addClass("progress-bar-warning");
-                    $("#uploadBtn", dialog).addClass("disabled");
-                }else{
-                    bar.addClass("progress-bar-success");
-                    msg = "<b>" + tip + "成功：</b>";
-                    if(isTotal){
-                        $("#uploadBtn", dialog).removeClass("disabled");
-                         
-                    }
-                }
-                if(result.totalInfo){
-                    msg += "<br>";
-                    msg += "<b>提示信息：</b>" + result.totalInfo;
-                }
-                msg += "<br><b>文件名称：</b>" + data.files[0].name;
-                $("#msgDiv", dialog).html(msg);
-            }
-        })
-    })
-	
-    function doSave(type){
-    	if(checkpassword()){
-    		var data = formHelper.getData();
-        	var url = contextPath+"/rest/permission/user/add";
-        	if(type && type == 'update'){
-        		url = contextPath+"/rest/permission/user/update";
-        	}
-        	$.ajax({
-        		url:url,
-        		type:'POST',
-        		contentType:'application/json',
-        		data:JSON.stringify({"user":data}),
-        		dataType:'json',
-        		success:function(ret){
-        			$('#replicationModal').modal('hide');
-        			rcsGrid.reload();
-        		},
-        		error:function(ret){
-        			
-        		}
-        		
-        	})
-    	}
     	
     }
-	
-	/*function ajaxFileUpload() {  
-		  
-		$.ajaxFileUpload({  
-		    url : "http://localhost:8080/com.primeton.iaas.selfservice.portal/rest/caas/replicationcontrollers/add",  
-		    secureuri : false,  
-		    data : {  
-		        filePre : "feedback",  
-		        p : new Date()  
-		    },  
-		    fileElementId : "file",  
-		    dataType : "json",  
-		    success : function(data) {  
-		        if (data.status == "success") {  
-		            //上传成功  
-		        }  
-		        switch(data.message){  
-		         //解析上传状态  
-		            case "0" : //上传成功  
-		                       break;  
-		            case "-1" : //上传文件不能为空  
-		                      break;  
-		            default: //上传失败  
-		                 break;  
-		        }  
-		    },  
-		    error : function(data) {  
-		        //上传失败  
-		    }  
-		});*/
-	
-	function doUpload() {  
-	     var formData = new FormData($( "#uploadForm" )[0]);  
-	     $.ajax({  
-	          url: 'http://localhost:8080/com.primeton.iaas.selfservice.portal/rest/caas/replicationcontrollers/add' ,  
-	          type: 'POST',  
-	          data: formData,  
-	          async: false,  
-	          cache: false,  
-	          contentType: false,  
-	          processData: false,  
-	          success: function (returndata) {  
-	              alert(123);  
-	          },  
-	          error: function (returndata) {  
-	              alert(456);  
-	          }  
-	     });  
-	}
-	
-	function UpladFile() {
-	    var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
-	    var FileController = "http://localhost:8080/com.primeton.iaas.selfservice.portal/rest/caas/replicationcontrollers/add";                    // 接收上传文件的后台地址 
-	
-	    // FormData 对象
-	    var form = new FormData($( "#uploadForm" )[0]);
-	
-	    // XMLHttpRequest 对象
-	    var xhr = new XMLHttpRequest();
-	    xhr.open("post", FileController, true);
-	    xhr.onload = function () {
-	       // alert("上传完成!");
-	    };
-	
-	    xhr.upload.addEventListener("progress", progressFunction, false);
-	    xhr.send(form);
-	}
-	
-	function progressFunction(evt) {
-	    var progressBar = document.getElementById("progressBar");
-	    var percentageDiv = document.getElementById("percentage");
-	    if (evt.lengthComputable) {
-	        progressBar.max = evt.total;
-	        progressBar.value = evt.loaded;
-	        percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
-	        if(evt.loaded==evt.total){
-	            alert("上传完成100%");
-	        }
-	    }
-	}
-
     var formHelper;
     $(function(){
     	Metronic.init(); 
